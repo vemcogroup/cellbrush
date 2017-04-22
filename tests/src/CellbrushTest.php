@@ -893,4 +893,30 @@ EOT;
     $this->assertEquals($expected, $table->render());
   }
 
+  function testCellAttributes() {
+
+    $table = Table::create()
+      ->addRowNames(['row0', 'row1', 'row2'])
+      ->addColNames(['col0', 'col1', 'col2'])
+      ->td('row0', 'col0', 'Diag 0')
+      ->td('row1', 'col1', 'Diag 1')
+      ->td('row2', 'col2', 'Diag 2')
+      ->addCellAttributes('row0', 'col1', ['attr' => 'testattr'])
+      ->addCellAttributes('row2', 'col2', ['attr2' => 'testattr2'])
+    ;
+
+    $expected = <<<EOT
+<table>
+  <tbody>
+    <tr><td>Diag 0</td><td attr="testattr"></td><td></td></tr>
+    <tr><td></td><td>Diag 1</td><td></td></tr>
+    <tr><td></td><td></td><td attr2="testattr2">Diag 2</td></tr>
+  </tbody>
+</table>
+
+EOT;
+
+    $this->assertEquals($expected, $table->render());
+  }
+
 }
