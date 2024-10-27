@@ -110,6 +110,17 @@ class TBodyWrapper implements TableSectionStructureInterface {
   }
 
   /**
+   * @param string $rowName
+   * @param string $class
+   *
+   * @return $this
+   */
+  public function setRowAttribute($rowName, $name, $value) {
+    $this->tbody->setRowAttribute($rowName, $name, $value);
+    return $this;
+  }
+
+  /**
    * @param string[] $rowClasses
    *   Format: $[$rowName] = $class
    *
