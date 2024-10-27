@@ -265,6 +265,7 @@ class TableSection implements TableSectionInterface {
     $cellAttributes = isset($this->cellAttributes[$rowName][$colName])? $this->cellAttributes[$rowName][$colName]: [];
 
     $this->cellAttributes[$rowName][$colName] = array_merge($cellAttributes, $attributes);
+    return $this;
   }
 
   /**
