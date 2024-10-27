@@ -3,8 +3,9 @@
 namespace Donquixote\Cellbrush\Tests;
 
 use Donquixote\Cellbrush\Table\Table;
+use PHPUnit\Framework\TestCase;
 
-class CellbrushTest extends \PHPUnit_Framework_TestCase {
+class CellbrushTest extends TestCase {
 
   function testRegularTable() {
 

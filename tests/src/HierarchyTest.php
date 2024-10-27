@@ -3,8 +3,9 @@
 namespace Donquixote\Cellbrush\Tests;
 
 use Donquixote\Cellbrush\Axis\DynamicAxis;
+use PHPUnit\Framework\TestCase;
 
-class HierarchyTest extends \PHPUnit_Framework_TestCase {
+class HierarchyTest extends TestCase {
 
   function testFlat() {
     $hierarchy = new DynamicAxis();

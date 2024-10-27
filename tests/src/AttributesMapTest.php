@@ -3,8 +3,9 @@
 namespace Donquixote\Cellbrush\Tests;
 
 use Donquixote\Cellbrush\Html\Multiple\StaticAttributesMap;
+use PHPUnit\Framework\TestCase;
 
-class AttributesMapTest extends \PHPUnit_Framework_TestCase {
+class AttributesMapTest extends TestCase {
 
   function testMerge() {
     $a = StaticAttributesMap::create(

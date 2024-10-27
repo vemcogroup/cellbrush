@@ -4,8 +4,9 @@ namespace Donquixote\Cellbrush\Tests;
 
 use Donquixote\Cellbrush\Cell\Cell;
 use Donquixote\Cellbrush\Matrix\CellMatrix;
+use PHPUnit\Framework\TestCase;
 
-class CellMatrixTest extends \PHPUnit_Framework_TestCase {
+class CellMatrixTest extends TestCase {
 
   function testRowspanSimple() {
     $cellMatrix = CellMatrix::create(2, 1);

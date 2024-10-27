@@ -5,8 +5,9 @@ namespace Donquixote\Cellbrush\Tests;
 use Donquixote\Cellbrush\Axis\DynamicAxis;
 use Donquixote\Cellbrush\Html\Multiple\StaticAttributesMap;
 use Donquixote\Cellbrush\TSection\TableSection;
+use PHPUnit\Framework\TestCase;
 
-class TableSectionTest extends \PHPUnit_Framework_TestCase {
+class TableSectionTest extends TestCase {
 
   function testRegularTable() {
     $columns = new DynamicAxis();
