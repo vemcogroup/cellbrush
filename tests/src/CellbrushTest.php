@@ -728,6 +728,51 @@ EOT;
     $this->assertXmlStringEqualsXmlString($expected, $table->render());
   }
 
+  function testTableAndSectionClassAndAttributes() {
+    $table = Table::create()
+      ->addColNames([0, 1])
+      ->addClasses(['overview-table', 'sticky-table'])
+      ->setAttribute('title', 'table title')
+    ;
+    $table->tbody()
+      ->addClass('tbody-striped')
+      ->setAttribute('title', 'main tbody')
+    ;
+    $table->tbody('second')
+      ->setAttribute('title', 'second tbody')
+      ->addRow('row0')->td(1, 'second 0.1')
+    ;
+    // A table section without rows is not printed.
+    $table->tbody('third')
+      ->addClass('non-existent')
+      ->setAttribute('title', 'non-existent tbody')
+    ;
+    $table->addRow(0)
+      ->td(0, 'cell 0.0')
+      ->td(1, 'cell 0.1')
+    ;
+
+    $expected = <<<EOT
+<table class="overview-table sticky-table" title="table title">
+  <tbody class="tbody-striped" title="main tbody">
+    <tr>
+      <td>cell 0.0</td>
+      <td>cell 0.1</td>
+    </tr>
+  </tbody>
+  <tbody title="second tbody">
+    <tr>
+      <td></td>
+      <td>second 0.1</td>
+    </tr>
+  </tbody>
+</table>
+
+EOT;
+
+    $this->assertXmlStringEqualsXmlString($expected, $table->render());
+  }
+
   function testSetColumnOrder() {
 
     $table = Table::create()
