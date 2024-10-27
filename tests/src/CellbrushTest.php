@@ -919,4 +919,50 @@ EOT;
     $this->assertEquals($expected, $table->render());
   }
 
+  /**
+   * Tests row groups and column groups with attributes.
+   *
+   * @see self::testRowAndColGroups()
+   */
+  function testRowAndColGroupsWithAttributes() {
+    $table = Table::create()
+      ->addColNames(['name', 'info.color', 'info.price'])
+      ->addRowNames(['banana.description', 'banana.info'])
+      ->th('banana', 'name', 'Banana')
+      ->td('banana.description', 'info', 'A yellow fruit.')
+      ->td('banana.info', 'info.color', 'yellow')
+      ->td('banana.info', 'info.price', '60 cent')
+      ->addRowNames(['coconut.description', 'coconut.info'])
+      ->th('coconut', 'name', 'Coconut')
+      ->td('coconut.description', 'info', 'Has liquid inside.')
+      ->td('coconut.info', 'info.color', 'brown')
+      ->td('coconut.info', 'info.price', '3 dollar')
+      ->setCellAttribute('banana', 'name', 'title', 'banana name')
+      ->setCellAttribute('banana.description', 'info', 'title', 'banana description')
+      ->setCellAttribute('banana.info', 'info.price', 'title', 'banana price')
+    ;
+    $table->headRow()
+      ->th('name', 'Name')
+      ->th('info.color', 'Color')
+      ->th('info.price', 'Price')
+    ;
+
+    $expected = <<<EOT
+<table>
+  <thead>
+    <tr><th>Name</th><th>Color</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><th title="banana name" rowspan="2">Banana</th><td title="banana description" colspan="2">A yellow fruit.</td></tr>
+    <tr><td>yellow</td><td title="banana price">60 cent</td></tr>
+    <tr><th rowspan="2">Coconut</th><td colspan="2">Has liquid inside.</td></tr>
+    <tr><td>brown</td><td>3 dollar</td></tr>
+  </tbody>
+</table>
+
+EOT;
+
+    $this->assertEquals($expected, $table->render());
+  }
+
 }
