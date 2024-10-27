@@ -74,6 +74,62 @@ EOT;
     $this->assertEquals($expected, $html);
   }
 
+  function testTableSections() {
+    $table = Table::create()->addColNames(['col0', 'col1', 'col2']);
+    $table->addRow('row0')
+      ->td('col0', 'Diag 0');
+    $table->addRow('row1')
+      ->td('col1', 'Diag 1');
+    $table->addRow('row2')
+      ->td('col2', 'Diag 2');
+
+    $table->headRow()
+      ->th('col0', 'Column 0')
+      ->th('col1', 'Column 1')
+      ->th('col2', 'Column 2')
+    ;
+
+    $table->tfoot()->addRow('foot row')
+      ->td('col1', 'foot center')
+      ->td('col2', 'foot right')
+    ;
+    $table->tfoot()->addRow('foot row 2')
+      ->td('col0', 'foot bottom left')
+    ;
+    $table->tbody('other')->addRow('row0')
+      ->td('col0', 'other tbody 0 / 0')
+    ;
+    $table->tbody('other')->addRow('row1')
+      ->td('col2', 'other tbody 1 / 2')
+    ;
+
+    $html = $table->render();
+
+    $expected = <<<EOT
+<table>
+  <thead>
+    <tr><th>Column 0</th><th>Column 1</th><th>Column 2</th></tr>
+  </thead>
+  <tfoot>
+    <tr><td></td><td>foot center</td><td>foot right</td></tr>
+    <tr><td>foot bottom left</td><td></td><td></td></tr>
+  </tfoot>
+  <tbody>
+    <tr><td>Diag 0</td><td></td><td></td></tr>
+    <tr><td></td><td>Diag 1</td><td></td></tr>
+    <tr><td></td><td></td><td>Diag 2</td></tr>
+  </tbody>
+  <tbody>
+    <tr><td>other tbody 0 / 0</td><td></td><td></td></tr>
+    <tr><td></td><td></td><td>other tbody 1 / 2</td></tr>
+  </tbody>
+</table>
+
+EOT;
+
+    $this->assertXmlStringEqualsXmlString($expected, $html);
+  }
+
   function testFullRowspan() {
     $table = Table::create()
       ->addRowNames(['row0', 'row1', 'row2'])
