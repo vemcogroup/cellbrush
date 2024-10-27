@@ -81,6 +81,7 @@ class DynamicAxis {
     foreach ($names as $name) {
       $this->addName($name);
     }
+    return $this;
   }
 
   /**
@@ -170,6 +171,7 @@ class DynamicAxis {
     foreach ($nameSuffixes as $suffix) {
       $this->addName($groupName . '.' . $suffix);
     }
+    return $this;
   }
 
   /**

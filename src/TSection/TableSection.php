@@ -272,6 +272,7 @@ class TableSection implements TableSectionInterface {
    */
   public function addCellClass($rowName, $colName, $class) {
     $this->cellClasses[$rowName][$colName][$class] = $class;
+    return $this;
   }
 
   /**
