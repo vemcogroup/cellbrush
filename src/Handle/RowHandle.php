@@ -103,4 +103,25 @@ class RowHandle {
     return $this;
   }
 
+  /**
+   * @param string $class
+   *
+   * @return $this
+   */
+  public function addClass($class) {
+    $this->tsection->addRowClass($this->rowName, $class);
+    return $this;
+  }
+
+  /**
+   * @param string $key
+   * @param string $value
+   *
+   * @return $this
+   */
+  public function setAttribute($key, $value) {
+    $this->tsection->setRowAttribute($this->rowName, $key, $value);
+    return $this;
+  }
+
 }
