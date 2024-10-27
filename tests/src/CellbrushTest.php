@@ -901,8 +901,8 @@ EOT;
       ->td('row0', 'col0', 'Diag 0')
       ->td('row1', 'col1', 'Diag 1')
       ->td('row2', 'col2', 'Diag 2')
-      ->addCellAttributes('row0', 'col1', ['attr' => 'testattr'])
-      ->addCellAttributes('row2', 'col2', ['attr2' => 'testattr2'])
+      ->setCellAttribute('row0', 'col1', 'attr', 'testattr')
+      ->setCellAttribute('row2', 'col2', 'attr2', 'testattr2')
     ;
 
     $expected = <<<EOT
