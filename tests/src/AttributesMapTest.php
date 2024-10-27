@@ -13,5 +13,9 @@ class AttributesMapTest extends \PHPUnit_Framework_TestCase {
     $b = StaticAttributesMap::create(
       ['c0' => ['id' => 'c0id_b']],
       ['c0' => ['c0class_b' => 'c0class_b']]);
+    $merged = $a->merge($b);
+    $this->assertSame(
+      ' id="c0id" class="c0class c0class_b"',
+      $merged->nameGetAttributes('c0')->renderAttributes());
   }
 }
