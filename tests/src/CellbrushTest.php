@@ -737,7 +737,6 @@ EOT;
 EOT;
 
     $this->assertEquals($expected, $table->render());
-
   }
 
 }
