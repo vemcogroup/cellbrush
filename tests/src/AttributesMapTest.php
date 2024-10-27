@@ -19,4 +19,5 @@ class AttributesMapTest extends TestCase {
       ' id="c0id" class="c0class c0class_b"',
       $merged->nameGetAttributes('c0')->renderAttributes());
   }
+
 }
