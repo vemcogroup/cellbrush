@@ -739,4 +739,57 @@ EOT;
     $this->assertEquals($expected, $table->render());
   }
 
+  /**
+   * Tests row groups and column groups with classes.
+   *
+   * @see self::testRowAndColGroups()
+   */
+  function testRowAndColGroupsWithClasses() {
+    $table = Table::create()
+      ->addColNames(['name', 'info.color', 'info.price'])
+      ->addRowNames(['banana.description', 'banana.info'])
+      ->th('banana', 'name', 'Banana')
+      ->td('banana.description', 'info', 'A yellow fruit.')
+      ->td('banana.info', 'info.color', 'yellow')
+      ->td('banana.info', 'info.price', '60 cent')
+      ->addRowNames(['coconut.description', 'coconut.info'])
+      ->th('coconut', 'name', 'Coconut')
+      ->td('coconut.description', 'info', 'Has liquid inside.')
+      ->td('coconut.info', 'info.color', 'brown')
+      ->td('coconut.info', 'info.price', '3 dollar')
+      ->addCellClass('banana', 'name', 'banana-name')
+      ->addCellClass('banana.description', 'info', 'banana-description')
+      ->addCellClass('banana.info', 'info.price', 'banana-price')
+      // A row class on a row group is ignored, because there is no <tr> that
+      // would represent the entire row group.
+      ->addRowClass('banana', 'banana-row')
+      ->addRowClass('banana.info', 'banana-info-row')
+      ->addColClass('info', 'info-col')
+      ->addColClass('info.price', 'price-col')
+    ;
+    $table->tbody()->addColClass('info.price', 'price-tbody-col');
+    $table->headRow()
+      ->th('name', 'Name')
+      ->th('info.color', 'Color')
+      ->th('info.price', 'Price')
+    ;
+
+    $expected = <<<EOT
+<table>
+  <thead>
+    <tr><th>Name</th><th>Color</th><th class="price-col">Price</th></tr>
+  </thead>
+  <tbody>
+    <tr><th rowspan="2" class="banana-name">Banana</th><td colspan="2" class="banana-description info-col">A yellow fruit.</td></tr>
+    <tr class="banana-info-row"><td>yellow</td><td class="banana-price price-col price-tbody-col">60 cent</td></tr>
+    <tr><th rowspan="2">Coconut</th><td colspan="2" class="info-col">Has liquid inside.</td></tr>
+    <tr><td>brown</td><td class="price-col price-tbody-col">3 dollar</td></tr>
+  </tbody>
+</table>
+
+EOT;
+
+    $this->assertEquals($expected, $table->render());
+  }
+
 }
