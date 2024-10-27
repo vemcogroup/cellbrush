@@ -4,9 +4,9 @@ namespace Donquixote\Cellbrush\Table;
 
 use Donquixote\Cellbrush\Columns\ColumnClassesTrait;
 use Donquixote\Cellbrush\Columns\TableColumnsTrait;
+use Donquixote\Cellbrush\Handle\RowHandle;
 use Donquixote\Cellbrush\Html\Multiple\DynamicAttributesMap;
 use Donquixote\Cellbrush\Html\MutableAttributesTrait;
-use Donquixote\Cellbrush\Handle\RowHandle;
 use Donquixote\Cellbrush\TSection\TableSection;
 
 class Table extends TBodyWrapper implements TableInterface {

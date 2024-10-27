@@ -6,11 +6,11 @@ use Donquixote\Cellbrush\Axis\Axis;
 use Donquixote\Cellbrush\Axis\DynamicAxis;
 use Donquixote\Cellbrush\BuildContainer\BuildContainer;
 use Donquixote\Cellbrush\BuildContainer\BuildContainerBase;
+use Donquixote\Cellbrush\Handle\RowHandle;
+use Donquixote\Cellbrush\Handle\SectionColHandle;
 use Donquixote\Cellbrush\Html\Multiple\DynamicAttributesMap;
 use Donquixote\Cellbrush\Html\Multiple\StaticAttributesMap;
 use Donquixote\Cellbrush\Html\MutableAttributesTrait;
-use Donquixote\Cellbrush\Handle\RowHandle;
-use Donquixote\Cellbrush\Handle\SectionColHandle;
 
 class TableSection implements TableSectionInterface {
 
