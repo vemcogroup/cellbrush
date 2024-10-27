@@ -6,6 +6,7 @@ use Donquixote\Cellbrush\Axis\Axis;
 use Donquixote\Cellbrush\Axis\DynamicAxis;
 use Donquixote\Cellbrush\BuildContainer\BuildContainer;
 use Donquixote\Cellbrush\BuildContainer\BuildContainerBase;
+use Donquixote\Cellbrush\Columns\ColumnClassesTrait;
 use Donquixote\Cellbrush\Handle\RowHandle;
 use Donquixote\Cellbrush\Handle\SectionColHandle;
 use Donquixote\Cellbrush\Html\Multiple\DynamicAttributesMap;
@@ -14,7 +15,7 @@ use Donquixote\Cellbrush\Html\MutableAttributesTrait;
 
 class TableSection implements TableSectionInterface {
 
-  use MutableAttributesTrait;
+  use MutableAttributesTrait, ColumnClassesTrait;
 
   /**
    * @var string
@@ -36,13 +37,6 @@ class TableSection implements TableSectionInterface {
    *   Format: $[] = ['odd', 'even']
    */
   private $rowStripings = array();
-
-  /**
-   * Column classes for this table section.
-   *
-   * @var DynamicAttributesMap
-   */
-  private $colAttributes;
 
   /**
    * @var \Donquixote\Cellbrush\Cell\CellInterface[][]
@@ -79,6 +73,7 @@ class TableSection implements TableSectionInterface {
    */
   function __construct($tagName) {
     $this->__constructMutableAttributes();
+    $this->__constructColumnClasses();
     $this->tagName = $tagName;
     $this->rows = new DynamicAxis();
     $this->colAttributes = new DynamicAttributesMap();
@@ -93,32 +88,6 @@ class TableSection implements TableSectionInterface {
    */
   public function colHandle($colName) {
     return new SectionColHandle($this, $colName);
-  }
-
-  /**
-   * Adds a column class for this table section.
-   *
-   * @param string $colName
-   * @param string $class
-   *
-   * @return $this
-   */
-  public function addColClass($colName, $class) {
-    $this->colAttributes->nameAddClass($colName, $class);
-    return $this;
-  }
-
-  /**
-   * Adds column classes for this table section.
-   *
-   * @param string[] $colClasses
-   *   Format: $[$colName] = $class
-   *
-   * @return $this
-   */
-  public function addColClasses(array $colClasses) {
-    $this->colAttributes->namesAddClasses($colClasses);
-    return $this;
   }
 
   /**
