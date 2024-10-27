@@ -32,7 +32,14 @@ class StaticAttributesMap extends AttributesMapBase {
         $rowCells[$name] = $rowCells[$name]->addClasses($classes);
       }
     }
-    // @todo Implement for attributes.
+    foreach ($this->attributes as $name => $attributes) {
+      // Currently the ->setAttribute() method is not part of any interface.
+      if (isset($rowCells[$name]) && method_exists($rowCells[$name], 'setAttribute')) {
+        foreach ($attributes as $key => $value) {
+          $rowCells[$name] = $rowCells[$name]->setAttribute($key, $value);
+        }
+      }
+    }
   }
 
   /**

@@ -28,6 +28,17 @@ class ShadowCell implements CellInterface {
   }
 
   /**
+   * @param string $key
+   * @param string $value
+   *
+   * @return static
+   */
+  function setAttribute($key, $value) {
+    // Do nothing.
+    return $this;
+  }
+
+  /**
    * @param int $rowspan
    *
    * @return static
