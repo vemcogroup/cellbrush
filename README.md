@@ -2,6 +2,8 @@
 
 A library to generate HTML tables with PHP, with support for rowspan and colspan.
 
+_If you read this in packagist, some parts fo this README are not visible. Go to [github](https://github.com/donquixote/cellbrush) instead._
+
 Table structure:
 
 * Named rows and columns, so they can be targeted with string keys.
