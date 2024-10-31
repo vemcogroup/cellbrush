@@ -1,5 +1,3 @@
-[![Build Status](https://secure.travis-ci.org/donquixote/cellbrush.png)](https://travis-ci.org/donquixote/cellbrush)
-
 # Cellbrush table generator
 
 A library to generate HTML tables with PHP.
