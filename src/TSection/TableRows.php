@@ -73,7 +73,6 @@ class TableRows {
       $this->rows[$rowName] = $this->iRow++;
     }
     return $this;
-
   }
 
   /**

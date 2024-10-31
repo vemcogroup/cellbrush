@@ -52,4 +52,5 @@ interface RangeInterface {
    * @return int
    */
   public function iMax();
+
 }

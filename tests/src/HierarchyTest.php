@@ -61,4 +61,5 @@ class HierarchyTest extends TestCase {
       ['A.x.22', 'A.y', 'B.x'],
       $snapshot->getLeafNames());
   }
+
 }
