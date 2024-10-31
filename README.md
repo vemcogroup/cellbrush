@@ -1,6 +1,6 @@
-# Cellbrush table generator
+# Cellbrush: Generate complex HTML tables with PHP
 
-A library to generate HTML tables with PHP.
+A library to generate HTML tables with PHP, with support for rowspan and colspan.
 
 Table structure:
 
