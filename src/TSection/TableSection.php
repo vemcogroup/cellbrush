@@ -149,6 +149,18 @@ class TableSection implements TableSectionInterface {
   }
 
   /**
+   * @param string $rowName
+   * @param string $name
+   * @param string $value
+   *
+   * @return $this
+   */
+  public function setRowAttribute($rowName, $name, $value) {
+    $this->rowAttributes->nameSetAttribute($rowName, $name, $value);
+    return $this;
+  }
+
+  /**
    * @param string[] $rowClasses
    *   Format: $[$rowName] = $class
    *

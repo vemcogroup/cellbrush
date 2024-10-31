@@ -529,6 +529,37 @@ EOT;
     $this->assertEquals($expected, $table->render());
   }
 
+  function testRowAttributes() {
+    $table = Table::create()->addColNames(['col0', 'col1']);
+    $table->addRow('row0')
+      ->addClass('row0-class')
+      ->setAttribute('title', 'Row 0 title')
+    ;
+    $table->addRow('row1')->td('col1', '1/1');
+    $table->setRowAttribute('row1', 'title', 'row 1 title');
+    $table->addRow('group')->td('col0', 'AB left');
+    $table->addRow('group.a')->td('col1', 'A right');
+    $table->addRow('group.b')->td('col1', 'B right');
+    // A row attribute on a rowspan group is ignored.
+    $table->setRowAttribute('group', 'title', 'Group AB');
+    $table->setRowAttribute('group.a', 'title', 'Group part A');
+    $table->setRowAttribute('group.b', 'title', 'Group part B');
+
+    $expected = <<<EOT
+<table>
+  <tbody>
+    <tr title="Row 0 title" class="row0-class"><td></td><td></td></tr>
+    <tr title="row 1 title"><td></td><td>1/1</td></tr>
+    <tr title="Group part A"><td rowspan="2">AB left</td><td>A right</td></tr>
+    <tr title="Group part B"><td>B right</td></tr>
+  </tbody>
+</table>
+
+EOT;
+
+    $this->assertEquals($expected, $table->render());
+  }
+
   function testRowStripingOddEven() {
     $table = Table::create()
       ->addRowNames(['row0', 'row1', 'row2', 'row3', 'row4', 'row5'])
