@@ -934,14 +934,15 @@ EOT;
       ->td('row2', 'col2', 'Diag 2')
       ->setCellAttribute('row0', 'col1', 'attr', 'testattr')
       ->setCellAttribute('row2', 'col2', 'attr2', 'testattr2')
+      ->setColAttribute('col1', 'title', 'col 1 title')
     ;
 
     $expected = <<<EOT
 <table>
   <tbody>
-    <tr><td>Diag 0</td><td attr="testattr"></td><td></td></tr>
-    <tr><td></td><td>Diag 1</td><td></td></tr>
-    <tr><td></td><td></td><td attr2="testattr2">Diag 2</td></tr>
+    <tr><td>Diag 0</td><td title="col 1 title" attr="testattr"></td><td></td></tr>
+    <tr><td></td><td title="col 1 title">Diag 1</td><td></td></tr>
+    <tr><td></td><td title="col 1 title"></td><td attr2="testattr2">Diag 2</td></tr>
   </tbody>
 </table>
 
@@ -971,7 +972,10 @@ EOT;
       ->setCellAttribute('banana', 'name', 'title', 'banana name')
       ->setCellAttribute('banana.description', 'info', 'title', 'banana description')
       ->setCellAttribute('banana.info', 'info.price', 'title', 'banana price')
+      ->setColAttribute('info', 'col-attr', 'info col')
+      ->setColAttribute('info.price', 'col-attr', 'price col')
     ;
+    $table->tbody()->setColAttribute('info.color', 'col-attr', 'color tbody col');
     $table->headRow()
       ->th('name', 'Name')
       ->th('info.color', 'Color')
@@ -981,13 +985,13 @@ EOT;
     $expected = <<<EOT
 <table>
   <thead>
-    <tr><th>Name</th><th>Color</th><th>Price</th></tr>
+    <tr><th>Name</th><th>Color</th><th col-attr="price col">Price</th></tr>
   </thead>
   <tbody>
-    <tr><th title="banana name" rowspan="2">Banana</th><td title="banana description" colspan="2">A yellow fruit.</td></tr>
-    <tr><td>yellow</td><td title="banana price">60 cent</td></tr>
-    <tr><th rowspan="2">Coconut</th><td colspan="2">Has liquid inside.</td></tr>
-    <tr><td>brown</td><td>3 dollar</td></tr>
+    <tr><th title="banana name" rowspan="2">Banana</th><td title="banana description" col-attr="info col" colspan="2">A yellow fruit.</td></tr>
+    <tr><td col-attr="color tbody col">yellow</td><td title="banana price" col-attr="price col">60 cent</td></tr>
+    <tr><th rowspan="2">Coconut</th><td col-attr="info col" colspan="2">Has liquid inside.</td></tr>
+    <tr><td col-attr="color tbody col">brown</td><td col-attr="price col">3 dollar</td></tr>
   </tbody>
 </table>
 

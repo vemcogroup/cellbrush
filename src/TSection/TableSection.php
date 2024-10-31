@@ -6,7 +6,7 @@ use Donquixote\Cellbrush\Axis\Axis;
 use Donquixote\Cellbrush\Axis\DynamicAxis;
 use Donquixote\Cellbrush\BuildContainer\BuildContainer;
 use Donquixote\Cellbrush\BuildContainer\BuildContainerBase;
-use Donquixote\Cellbrush\Columns\ColumnClassesTrait;
+use Donquixote\Cellbrush\Columns\ColumnAttributesTrait;
 use Donquixote\Cellbrush\Handle\RowHandle;
 use Donquixote\Cellbrush\Handle\SectionColHandle;
 use Donquixote\Cellbrush\Html\Multiple\DynamicAttributesMap;
@@ -15,7 +15,7 @@ use Donquixote\Cellbrush\Html\MutableAttributesTrait;
 
 class TableSection implements TableSectionInterface {
 
-  use MutableAttributesTrait, ColumnClassesTrait;
+  use MutableAttributesTrait, ColumnAttributesTrait;
 
   /**
    * @var string
@@ -83,7 +83,7 @@ class TableSection implements TableSectionInterface {
    */
   function __construct($tagName) {
     $this->__constructMutableAttributes();
-    $this->__constructColumnClasses();
+    $this->__constructColumnAttributes();
     $this->tagName = $tagName;
     $this->rows = new DynamicAxis();
     $this->colAttributes = new DynamicAttributesMap();

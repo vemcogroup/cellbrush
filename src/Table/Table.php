@@ -2,7 +2,7 @@
 
 namespace Donquixote\Cellbrush\Table;
 
-use Donquixote\Cellbrush\Columns\ColumnClassesTrait;
+use Donquixote\Cellbrush\Columns\ColumnAttributesTrait;
 use Donquixote\Cellbrush\Columns\TableColumnsTrait;
 use Donquixote\Cellbrush\Handle\RowHandle;
 use Donquixote\Cellbrush\Html\Multiple\DynamicAttributesMap;
@@ -11,7 +11,7 @@ use Donquixote\Cellbrush\TSection\TableSection;
 
 class Table extends TBodyWrapper implements TableInterface {
 
-  use MutableAttributesTrait, TableColumnsTrait, ColumnClassesTrait;
+  use MutableAttributesTrait, TableColumnsTrait, ColumnAttributesTrait;
 
   /**
    * @var TableSection
@@ -37,7 +37,7 @@ class Table extends TBodyWrapper implements TableInterface {
   function __construct() {
     $this->__constructMutableAttributes();
     $this->__constructTableColumns();
-    $this->__constructColumnClasses();
+    $this->__constructColumnAttributes();
     $this->columns;
     $this->thead = new TableSection('thead');
     parent::__construct(new TableSection('tbody'));
