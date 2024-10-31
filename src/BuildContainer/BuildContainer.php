@@ -80,6 +80,7 @@ class BuildContainer extends BuildContainerBase {
     $cellContents = $this->CellContents;
     $cellTagNames = $this->CellTagNames;
     $cellClasses = $this->CellClasses;
+    $cellAttributes = $this->CellAttributes;
     /** @var Cell\Cell[][] $namedCells */
     $namedCells = [];
     foreach ($cellContents as $rowName => $rowCellContents) {
@@ -89,6 +90,9 @@ class BuildContainer extends BuildContainerBase {
       $rowCellClasses = isset($cellClasses[$rowName])
         ? $cellClasses[$rowName]
         : [];
+      $rowCellAttributes = isset($cellAttributes[$rowName])
+        ? $cellAttributes[$rowName]
+        : [];
       $rowNamedCells = [];
       foreach ($rowCellContents as $colName => $cellContent) {
         $cellTagName = isset($rowCellTagNames[$colName])
@@ -97,6 +101,11 @@ class BuildContainer extends BuildContainerBase {
         $cell = new Cell\Cell($cellTagName, $cellContent);
         if (isset($rowCellClasses[$colName])) {
           $cell = $cell->addClasses($rowCellClasses[$colName]);
+        }
+        if (isset($rowCellAttributes[$colName])) {
+          foreach ($rowCellAttributes[$colName] as $key => $value) {
+            $cell = $cell->setAttribute($key, $value);
+          }
         }
         $rowNamedCells[$colName] = $cell;
       }
@@ -167,6 +176,23 @@ class BuildContainer extends BuildContainerBase {
     }
 
     $matrix->setCellClasses($cellClassesIndexed);
+
+    $cellAttributesIndexed = [];
+    foreach ($this->CellAttributes as $rowName => $rowCellAttributes) {
+      if ($this->rows->nameIsLeaf($rowName)) {
+        $iRow = $this->rows->subtreeIndex($rowName);
+        $rowCellAttributesIndexed = [];
+        foreach ($rowCellAttributes as $colName => $attributes) {
+          if ($this->columns->nameIsLeaf($colName)) {
+            $iCol = $this->columns->subtreeIndex($colName);
+            $rowCellAttributesIndexed[$iCol] = $attributes;
+          }
+        }
+        $cellAttributesIndexed[$iRow] = $rowCellAttributesIndexed;
+      }
+    }
+
+    $matrix->setCellAttributes($cellAttributesIndexed);
 
     foreach ($this->NamedCells as $rowName => $rowCells) {
       $rowRange = $this->rows->subtreeRange($rowName);

@@ -69,6 +69,16 @@ class TableSection implements TableSectionInterface {
   private $cellClasses = [];
 
   /**
+   * Attributes for table cells.
+   *
+   * These can be set even if no content is set for this cell yet.
+   *
+   * @var string[][][]
+   *   Format: $[$rowName][$colName][$key] = $value
+   */
+  private $cellAttributes = [];
+
+  /**
    * @param string $tagName
    */
   function __construct($tagName) {
@@ -245,6 +255,19 @@ class TableSection implements TableSectionInterface {
   }
 
   /**
+   * @param string $rowName
+   * @param string $colName
+   * @param string $name
+   * @param string $value
+   *
+   * @return $this
+   */
+  public function setCellAttribute($rowName, $colName, $name, $value) {
+    $this->cellAttributes[$rowName][$colName][$name] = $value;
+    return $this;
+  }
+
+  /**
    * @param Axis $columns
    *   Either 'thead' or 'tbody' or 'tfoot'.
    * @param StaticAttributesMap $tableColAttributes
@@ -265,6 +288,7 @@ class TableSection implements TableSectionInterface {
     /** @var BuildContainerBase $container */
     $container->CellContents = $this->cellContents;
     $container->CellClasses = $this->cellClasses;
+    $container->CellAttributes = $this->cellAttributes;
     $container->CellTagNames = $this->cellTagNames;
     $container->OpenEndCells = $this->openEndCells;
     $container->RowAttributes = clone $this->rowAttributes->staticCopy();

@@ -11,6 +11,7 @@ use Donquixote\Cellbrush\MiniContainer\MiniContainerBase;
  * @property string[][] CellContents
  * @property string[][] CellTagNames
  * @property string[][][] CellClasses
+ * @property string[][][] CellAttributes
  * @property bool[][] OpenEndCells
  *   Array marking those cells that are open-end.
  *   Format: $[$rowName][$colName] = true.
@@ -26,6 +27,7 @@ class BuildContainerBase extends MiniContainerBase {
       'CellContents' => [],
       'CellTagNames' => [],
       'CellClasses' => [],
+      'CellAttributes' => [],
       'OpenEndCells' => [],
       'RowAttributes' => new StaticAttributesMap(),
       'RowStripings' => [],
@@ -58,6 +60,15 @@ class BuildContainerBase extends MiniContainerBase {
    * @see BuildContainerBase::$CellClasses
    */
   protected function validate_CellClasses(array $cellClasses) {
+    // No validation, always accept.
+  }
+
+  /**
+   * @param string[][][] $cellClasses
+   *
+   * @see BuildContainerBase::$CellAttributes
+   */
+  protected function validate_CellAttributes(array $cellAttributes) {
     // No validation, always accept.
   }
 
