@@ -1,22 +1,23 @@
-# Cellbrush: Generate complex HTML tables with PHP
+# Cellbrush: Generate HTML tables with PHP
 
-A library to generate HTML tables with PHP, with support for rowspan and colspan.
+A library to generate complex HTML tables with PHP, with support for rowspan and colspan.
 
 _If you read this in packagist, some parts fo this README are not visible. Go to [github](https://github.com/donquixote/cellbrush) instead._
 
+
 Table structure:
 
-* Named rows and columns, so they can be targeted with string keys.
-* Colspan and rowspan using col groups and row groups.
-* Automatically fills up empty cells, to preserve the structural integrity.
-* Automatically warns on cell collisions.
+* String keys to identify rows and columns when building the table.
+* Colspan and rowspan using column groups and row groups.
+* Remaining empty cells filled in automatically, to preserve the structural integrity.
+* Warning on cell collisions.
 
 Tag attributes:
 
 * Easily add row classes.
 * Easily add row striping classes (odd/even zebra striping and more).
 * Easily add column classes that apply to all cells in the column.
-* (more planned)
+* Set html attributes for a row, or for all cells of a column.
 
 API design:
 
