@@ -101,8 +101,8 @@ class Table extends TBodyWrapper implements TableInterface {
     $columns = $this->columns->takeSnapshot();
     $html = '';
     $html .= $this->thead->render($columns, $colAttributes);
-    $html .= $this->tfoot->render($columns, $colAttributes);
     $html .= $this->renderTBody($columns, $colAttributes);
+    $html .= $this->tfoot->render($columns, $colAttributes);
     foreach ($this->tbodies as $tbody) {
       $html .= $tbody->render($columns, $colAttributes);
     }
